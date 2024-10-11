@@ -1,3 +1,5 @@
+/* 
+
 // для http подключения порты 80 8080, для https - 443
 const http = require('http');
 
@@ -39,10 +41,15 @@ font-size: 32px;
 <br>
 <p>Меня вернул сервер</p>
 </div>
+<script>
+for (let i = 1; i <= 100; i++) {
+    console.log(i);
+}
+</script>
 </body>
 </html>  
     `
-
+    
     res.end(html);
 });
 
@@ -50,4 +57,20 @@ const PORT = 15151;
 
 server.listen(PORT, () => {
     console.log(`Сервер запущен по адресу: http://localhost:${PORT}`);
-})
+}) */
+
+/* const {showMessage, getSum, Animal, etalonAnimal} = require('./module');
+
+showMessage("Message!");
+
+console.log(getSum(10, 20));
+
+const animal = new Animal('Барсик', '6');
+
+console.log(etalonAnimal)*/
+
+const Animal = require('./module');
+
+const dog = new Animal("Dog", "Snoop Dog");
+
+console.log(module);
