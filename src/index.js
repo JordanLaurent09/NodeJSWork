@@ -1,51 +1,70 @@
+const fs = require('fs');
 const moment = require('moment');
 
-/*let now = moment();
+/* fs.readFile('text.txt', 'utf8', (err, data) => {
+    if (err) {
+        console.log(err);
+        throw new Error(err.message);
+    }
+    console.log(data);
+}); */
 
-console.log(now.format());*/
+/* fs.writeFile('text.txt', 'Some data to write', 'utf8', (err) => {
+    if (err) {
+        console.log(err);
+        throw new Error(err.message);
+    }
+    console.log("Данные успешно записаны");
+}) */
 
-/* const someData = moment("2024-08-15");
-console.log(someData.format("DD MM YYYY")); */
+ 
+/* fs.appendFile('text.txt', '\n\rsome content', 'utf8', (err) => {
+    if (err) {
+        console.log(err);
+        throw new Error(err.message);
+    }
+    console.log("Данные успешно записаны");
+})  */   
 
+// функция раз в пять секунд считывает время и дописывает ее как лог в файл
 
-/* const now = moment();
-console.log(now.format("DD-MM-YYYY"));
-console.log(now.format("MMMM Do YYYY, h:mm:ss a"));
-console.log(now.format("dddd"));
-console.log(now.format("MMM Do YY")); */
+function timeLog() {
+    setInterval(() => {
+        let momentOfNow = moment();
+        let logInfo = momentOfNow.format('Do MMM YYYY|hh_mm_ss').toString();
+        fs.appendFile('timeLog.txt', '\n\r'+logInfo + ':[Всё хорошо]', 'utf8', (err) => {
+            if (err) {
+                console.log(err);
+                throw new Error(err.message);
+            }
+            console.log("Данные успешно записаны");
+        })
+    }, 5000);
+       
+}
 
-/* const nextWeek = moment().add(7, "days")
-console.log(nextWeek.format("DD.MM.YYYY")); */
+timeLog();
 
-/* const nextWeek = moment().subtract(7, "days")
-console.log(nextWeek.format("DD.MM.YYYY")); */
+/*fs.rename('text.txt', 'newText.txt', (err) => {
+    if (err) {
+        console.log('Возникла ошибка');
+        throw new Error(err.message);
+    }
+    console.log("Файл успешно переименован");
+})*/
 
-/*const example = moment().endOf("month")
-console.log(example.format("DD.MM.YYYY"));*/
+/* fs.unlink('newText.txt', (err) => {
+    if (err) {
+        console.log('Возникла ошибка');
+        throw new Error(err.message);
+    }
+    console.log("Файл успешно уничтожен");
+}) */
 
-/* const dateValidate = moment("2024-10-21", "YYYY-MM-DD", true);
-console.log(dateValidate); */
-
-/* const first = moment("2024-05-15");
-const second = moment("2023-08-22");
-
-console.log(first.isAfter(second)); // После
-console.log(first.isBefore(second)); // Перед
-console.log(first.isSame(second)); // Одинаковы ли */
-
-/* const first = moment("2024-05-15");
-const second = moment("2023-08-22");
-
-const difference = first.diff(second, "days");
-console.log(difference); */
-
-
-/*const now = moment().locale('ch');
-console.log(now);*/
-
-/* const now = moment();
-
-console.log(now.format("L"));
-console.log(now.format("LL"));
-console.log(now.format("LLL"));
-console.log(now.format("LLLL")); */
+fs.mkdir('newDir', {recursive: true}, (err) => {
+    if (err) {
+        console.log('Возникла ошибка');
+        throw new Error(err.message);
+    }
+    console.log("Папка успешно создана");
+})
