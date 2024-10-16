@@ -109,19 +109,35 @@ server.on('error', () => {
  */
 
 const http = require('http');
+const fs = require('fs');
 
 const server = http.createServer((req, res) => {
     if (req.url === '/' && req.method === 'GET') {
         res.statusCode = 200;
-        res.setHeader('Content-Type', 'txt/html', 'charset=utf 8');
+        res.setHeader('Content-Type', 'text/html; charset=utf8');
         res.end('<h1>Добро пожаловать на главную страницу<h1/>')
     } else if (req.url === '/about' && req.method === 'GET') {
         res.statusCode = 200;
-        res.setHeader('Content-Type', 'txt/html', 'charset=utf 8');
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
         res.end('<h1>Добро пожаловать на страницу О нас<h1/>')
-    } else {
+    } else if (req.url === '/user-data' && req.method === 'POST') {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+
+        fs.readFile('..public/testData.json', 'utf8', (err, data) => {
+            if (err) {
+                console.log("Возникла ошибка при чтении файла");
+                res.statusCode = 500;
+                res.statusMessage = 'Cant read file!';
+                res.end();
+            }
+
+            res.end(data);
+        });
+    } 
+    else {
         res.statusCode = 404;
-        es.setHeader('Content-Type', 'txt/plain', 'charset=utf 8');
+        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
         res.end("Страница не найдена");
     }
      
